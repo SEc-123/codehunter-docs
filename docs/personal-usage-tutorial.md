@@ -11,7 +11,6 @@ You need:
 - Access to the local project folder you want to review.
 - A configured AI provider/model in Code Hunter Settings.
 
-Do not use a temporary smoke-test copy or unrelated folder as the review source. The project path shown in Code Hunter should match the repository or folder you intend to assess.
 
 ## 1. Install And Activate Personal
 
