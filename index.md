@@ -1,12 +1,8 @@
 # Code Hunter Documentation
 
-This site is the public documentation entry for Code Hunter.
+Choose the tutorial for your Code Hunter version:
 
-- [Documentation home](README.md)
-- [Get started](docs/01-get-started.md)
-- [Personal end-to-end review](docs/02-personal-end-to-end.md)
-- [Team end-to-end workflow](docs/03-team-end-to-end.md)
-- [SCA release governance](docs/04-sca-release-governance.md)
-- [Integrations](docs/05-integrations.md)
-- [Troubleshooting](docs/08-troubleshooting.md)
+- [Code Hunter Personal usage tutorial](docs/personal-usage-tutorial.md)
+- [Code Hunter Team usage tutorial](docs/team-usage-tutorial.md)
 
+Reference material is available from the repository README after you complete the version-specific tutorial.
