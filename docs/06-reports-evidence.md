@@ -19,6 +19,8 @@ A defensible finding should connect:
 
 Personal reports are generated from reviewed findings.
 
+Example: [Code Hunter 3.1.75 Personal audit report](examples/codehunter-3.1.75-personal-audit-report.md).
+
 Typical contents:
 
 - Executive summary.
@@ -96,4 +98,3 @@ Avoid storing:
 - Raw credentials.
 - Customer secrets.
 - Unnecessary copies of source code outside the approved workspace.
-

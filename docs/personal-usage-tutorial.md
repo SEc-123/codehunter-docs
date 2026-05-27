@@ -103,6 +103,8 @@ A finding is not ready for a customer report if it only contains a rule name or 
 4. Confirm rejected or unreviewed findings are not included.
 5. Store the report with the review record.
 
+Example output: [Code Hunter 3.1.75 Personal audit report](examples/codehunter-3.1.75-personal-audit-report.md).
+
 ## 8. Generate A Scoped Fix Package
 
 1. Select an accepted finding.
