@@ -11,6 +11,12 @@ This repository contains customer-facing documentation for Code Hunter. Choose t
 | Code Hunter Personal | [View Personal tutorial](docs/personal-usage-tutorial.md) |
 | Code Hunter Team | [View Team tutorial](docs/team-usage-tutorial.md) |
 
+## Developer Tools
+
+Team developer-side agent tools are published separately from the desktop app.
+
+- [Code Hunter Team Developer Tools 3.1.86](developer-tools/code-hunter-team/3.1.86/README.md)
+
 ## Supplementary Reference
 
 Use these only when you need deeper product reference after completing the version-specific tutorial.
