@@ -1,31 +1,64 @@
 # Code Hunter Team Developer Tools 3.1.86
 
-This folder contains developer-side tools for Code Hunter Team 3.1.86.
+This folder contains ready-to-install developer plugins for Code Hunter Team 3.1.86.
 
-The developer tools are separate from the signed Code Hunter Team desktop app. Team administrators use the desktop app to create agent enrollments; developers install these tools in their local IDE/workspace and enroll with the one-time code shown by Team Agent Management.
+Team administrators create developer agent enrollments in the signed Code Hunter Team desktop app. Developers install one of the plugins below, then enroll with the one-time code shown by Team Agent Management.
 
-## Artifacts
+## Download
+
+| IDE | File | Status | SHA-256 |
+| --- | --- | --- | --- |
+| VS Code | [codehunter-team-vscode-3.1.86.vsix](plugins/vscode/codehunter-team-vscode-3.1.86.vsix) | Ready to install | `fb1a50908f10f64fce4b3fcbaaa7b87e1bf5b5efe128c3f74ee68ccdadae60cc` |
+| JetBrains IDEs | [codehunter-team-jetbrains-3.1.86.zip](plugins/jetbrains/codehunter-team-jetbrains-3.1.86.zip) | Ready to install | `e853805ff23544b6a35e7b4940578c77f41f23e68e399000a9d7dbc19c6258fa` |
+
+Both plugin packages bundle the Code Hunter Team agent and LSP binaries for:
+
+- `darwin-arm64`
+- `darwin-x64`
+- `linux-x64`
+- `win32-x64`
+
+## Install
+
+VS Code:
+
+```bash
+code --install-extension codehunter-team-vscode-3.1.86.vsix
+```
+
+JetBrains IDEs:
+
+Install `codehunter-team-jetbrains-3.1.86.zip` from **Settings / Plugins / Install Plugin from Disk**.
+
+## Verification
+
+The VS Code package was checked with `scripts/ide-install-smoke.mjs` and contains:
+
+- `extension/bin/darwin-arm64/code-hunter-team-agent`
+- `extension/bin/darwin-arm64/code-hunter-team-agent-lsp`
+- `extension/bin/darwin-x64/code-hunter-team-agent`
+- `extension/bin/darwin-x64/code-hunter-team-agent-lsp`
+- `extension/bin/linux-x64/code-hunter-team-agent`
+- `extension/bin/linux-x64/code-hunter-team-agent-lsp`
+- `extension/bin/win32-x64/code-hunter-team-agent.exe`
+- `extension/bin/win32-x64/code-hunter-team-agent-lsp.exe`
+
+The JetBrains package was built with `buildPlugin verifyPluginStructure` and contains the same `bin/` layout inside `codehunter-team-jetbrains-0.1.0.jar`.
+
+Embedded binary verification:
+
+- macOS binaries are signed with `Developer ID Application: Arvanta Cyber Inc. (6G85L86XV7)`.
+- Windows binaries have non-empty Authenticode PE certificate tables.
+- Linux binaries are `ELF 64-bit LSB pie executable, x86-64`, built for GNU/Linux.
+
+## Provenance
+
+The standalone macOS agent DMGs remain available for direct CLI distribution:
 
 | Platform | File | Status | SHA-256 |
 | --- | --- | --- | --- |
 | macOS x64 | [Code Hunter Team Developer Tools-3.1.86-x64.dmg](macos/darwin-x64/Code%20Hunter%20Team%20Developer%20Tools-3.1.86-x64.dmg) | Developer ID signed, Apple notarized, stapled, Gatekeeper accepted | `5fa688e78cd8b7a632763d97902c89a836a7f2392c22700a9b86977e1a52b22b` |
 | macOS arm64 | [Code Hunter Team Developer Tools-3.1.86-arm64.dmg](macos/darwin-arm64/Code%20Hunter%20Team%20Developer%20Tools-3.1.86-arm64.dmg) | Developer ID signed, Apple notarized, stapled, Gatekeeper accepted | `29c60d28ae9d4e6c4d630e312b02db33ebaf07fb81d742e7a2e13d3763d396d8` |
-| Windows x64 | [CodeHunter-Team-Developer-Tools-3.1.86-win32-x64-unsigned-for-signing.zip](windows/win32-x64/CodeHunter-Team-Developer-Tools-3.1.86-win32-x64-unsigned-for-signing.zip) | Unsigned Authenticode handoff for signing; do not distribute to developers yet | `f4bcdc33d304da6a57c3e16774208d10fe2e125b9a20a653b871aeefc0924992` |
-
-## macOS Verification
-
-The macOS DMGs contain:
-
-- `bin/code-hunter-team-agent`
-- `bin/code-hunter-team-agent-lsp`
-- `install.sh`
-- `manifest.json`
-
-Both embedded binaries and both DMGs were signed with:
-
-```text
-Developer ID Application: Arvanta Cyber Inc. (6G85L86XV7)
-```
 
 Apple notarization IDs:
 
@@ -34,19 +67,7 @@ Apple notarization IDs:
 | macOS x64 | `48b12937-fc0f-4d83-b51f-8f9225c23fb4` |
 | macOS arm64 | `6a964995-4266-4731-a269-9124cf4d49e0` |
 
-The macOS release manifest is available at [macos/developer-tools-release-3.1.86.json](macos/developer-tools-release-3.1.86.json).
+The Windows signing handoff package is retained for audit only:
 
-## Windows Signing Handoff
-
-The Windows package is intentionally unsigned. It is for Authenticode signing only.
-
-Sign every `sign_required=true` EXE in [windows/win32-x64/SIGNING_MANIFEST.json](windows/win32-x64/SIGNING_MANIFEST.json), preserving the same relative paths:
-
-- `bin/code-hunter-team-agent.exe`
-- `bin/code-hunter-team-agent-lsp.exe`
-
-Before signing, both PE certificate tables are empty (`virtualAddress=0`, `size=0`). After signing, return the signed EXEs or a zip with the same `bin/` layout so the final Windows developer-tools package can be assembled and marked distributable.
-
-## Linux Status
-
-Linux x64 developer tools are not included in this folder. The local build host has the Rust `x86_64-unknown-linux-musl` target installed, but the build is currently blocked by the missing `x86_64-linux-musl-gcc` C toolchain required by `ring`.
+- [CodeHunter-Team-Developer-Tools-3.1.86-win32-x64-unsigned-for-signing.zip](windows/win32-x64/CodeHunter-Team-Developer-Tools-3.1.86-win32-x64-unsigned-for-signing.zip)
+- [windows/win32-x64/SIGNING_MANIFEST.json](windows/win32-x64/SIGNING_MANIFEST.json)
